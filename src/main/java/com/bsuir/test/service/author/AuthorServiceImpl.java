@@ -29,7 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getAuthorById(Long id) {
+    public Author getAuthorById(int id) {
         Optional<Author> optional = authorRepository.findById(id);
         Author author = null;
         if (optional.isPresent()) {
@@ -41,7 +41,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthorById(Long id) {
+    public void deleteAuthorById(int id) {
         authorRepository.deleteById(id);
     }
 

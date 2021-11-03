@@ -67,7 +67,7 @@
         </thead>
         <tbody>
         <tr th:each="book : ${listBooks}">
-            <td width="100" style="word-wrap: break-word;" th:text="${book.title}"></td>
+            <td style="word-wrap: break-word;" th:text="${book.title}"></td>
             <td th:text="${book.genre}"></td>
             <td th:text="${book.yearOfPublishing}"></td>
             <td th:text="${book.specification}"></td>

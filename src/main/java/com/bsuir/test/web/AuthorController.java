@@ -41,14 +41,14 @@ public class AuthorController {
     }
 
     @GetMapping("/showAuthorFormForUpdate/{id}")
-    public String showAuthorFormForUpdate(@PathVariable(value = "id") Long id, Model model) {
+    public String showAuthorFormForUpdate(@PathVariable(value = "id") int id, Model model) {
         Author author = authorService.getAuthorById(id);
         model.addAttribute("author", author);
         return "update_author";
     }
 
     @GetMapping("/deleteAuthor/{id}")
-    public String deleteAuthor(@PathVariable(value = "id") Long id) {
+    public String deleteAuthor(@PathVariable(value = "id") int id) {
         authorService.deleteAuthorById(id);
         return "redirect:/author";
     }

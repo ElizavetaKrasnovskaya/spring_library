@@ -39,25 +39,26 @@ public class BookController {
         Book book = new Book();
         List<Author> authors = authorService.getAllAuthors();
         model.addAttribute("book", book);
-        model.addAttribute("authorsList", authors)
+        model.addAttribute("authorsList", authors);
         return "new_book";
     }
 
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("book") Book book) {
+        System.out.println(book);
         bookService.saveBook(book);
         return "redirect:/";
     }
 
     @GetMapping("/showBookFormForUpdate/{id}")
-    public String showBookFormForUpdate(@PathVariable(value = "id") Long id, Model model) {
+    public String showBookFormForUpdate(@PathVariable(value = "id") int id, Model model) {
         Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
         return "update_book";
     }
 
     @GetMapping("/deleteBook/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") Long id) {
+    public String deleteEmployee(@PathVariable(value = "id") int id) {
         bookService.deleteBookById(id);
         return "redirect:/";
     }

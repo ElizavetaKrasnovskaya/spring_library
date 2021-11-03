@@ -38,6 +38,17 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="authors">Choose author</label>
+            <select th:field="*{author}" class="form-control mb-4 col-4 selectpicker" id="authors">
+                <option value="">Nothing selected</option>
+                <option th:each="author : ${authorsList}"
+                        th:value="${author}"
+                        th:text="${author.surname } + ' ' + ${author.name}">
+                </option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-info col-2"> Save Book</button>
     </form>
 

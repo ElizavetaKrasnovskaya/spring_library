@@ -10,9 +10,9 @@ public interface AuthorService {
 
     void saveAuthor(Author author);
 
-    Author getAuthorById(Long id);
+    Author getAuthorById(int id);
 
-    void deleteAuthorById(Long id);
+    void deleteAuthorById(int id);
 
     Page<Author> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }
