@@ -45,7 +45,7 @@ public class BookController {
 
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("book") Book book) {
-        System.out.println(book);
+        book.setFree(true);
         bookService.saveBook(book);
         return "redirect:/";
     }
@@ -60,6 +60,14 @@ public class BookController {
     @GetMapping("/deleteBook/{id}")
     public String deleteEmployee(@PathVariable(value = "id") int id) {
         bookService.deleteBookById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/addBookToCabinet/{id}")
+    public String addBookToCabinet(@PathVariable(value = "id") int id) {
+        Book book = bookService.getBookById(id);
+        book.setFree(false);
+        bookService.saveBook(book);
         return "redirect:/";
     }
 

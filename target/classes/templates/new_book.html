@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Employee Management System</title>
+    <title>Library</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -43,7 +43,7 @@
             <select th:field="*{author}" class="form-control mb-4 col-4 selectpicker" id="authors">
                 <option value="">Nothing selected</option>
                 <option th:each="author : ${authorsList}"
-                        th:value="${author}"
+                        th:value="${author.id}"
                         th:text="${author.surname } + ' ' + ${author.name}">
                 </option>
             </select>
@@ -54,7 +54,7 @@
 
     <hr>
 
-    <a th:href="@{/}"> Back to Book List</a>
+    <a th:href="@{/}"> Back to Books List</a>
 </div>
 </body>
 </html>

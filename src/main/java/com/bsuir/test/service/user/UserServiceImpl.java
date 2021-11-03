@@ -5,6 +5,10 @@ import com.bsuir.test.model.User;
 import com.bsuir.test.repository.UserRepository;
 import com.bsuir.test.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +39,15 @@ public class UserServiceImpl implements UserService {
         User user = new User(registrationDto.getUsername(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Collections.singleton(Role.USER));
         return userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return userRepository.findAll(pageable);
     }
 
     @Override

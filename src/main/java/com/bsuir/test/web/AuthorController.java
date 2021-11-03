@@ -1,9 +1,7 @@
 package com.bsuir.test.web;
 
 import com.bsuir.test.model.Author;
-import com.bsuir.test.model.Book;
 import com.bsuir.test.service.author.AuthorService;
-import com.bsuir.test.service.book.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -72,6 +70,6 @@ public class AuthorController {
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("listAuthors", listAuthors);
-        return "list_author";
+        return "authors_list";
     }
 }

@@ -1,8 +1,5 @@
 package com.bsuir.test.model;
 
-import com.bsuir.test.converter.GenreConverter;
-
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,10 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -25,11 +20,12 @@ public class Book {
     private String title;
     private String yearOfPublishing;
     private String specification;
+    private boolean isFree;
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @ManyToOne
-    @JoinColumn(name="author_id", nullable=false)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     public int getId() {
@@ -62,6 +58,14 @@ public class Book {
 
     public void setSpecification(String specification) {
         this.specification = specification;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        isFree = free;
     }
 
     public Genre getGenre() {

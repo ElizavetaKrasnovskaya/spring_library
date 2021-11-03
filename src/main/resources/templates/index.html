@@ -23,11 +23,12 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a sec:authorize="hasAnyAuthority('USER')" class="navbar-brand" href="#" th:href="@{/}">Book catalog</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">Book catalog</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/author}">Author</a></li>
+                <li><a th:href="@{/author}">Authors</a></li>
+                <li sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/user}">Users</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
@@ -38,10 +39,13 @@
 <br>
 
 <div class="container my-2">
-    <h1>Book List</h1>
+    <h1>Books List</h1>
 
-    <a th:href="@{/showNewBookForm}" class="btn btn-primary btn-sm mb-3"> Add Book </a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/showNewBookForm}" class="btn btn-primary btn-sm mb-3"> Add
+        Book </a>
 
+    <br/>
+    <br/>
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
@@ -61,18 +65,32 @@
                 <a th:href="@{'/pageBook/' + ${currentPage} + '?sortField=specification&sortDir=' + ${reverseSortDir}}">
                     Specification</a>
             </th>
+            <th>
+                <a th:href="@{'/pageBook/' + ${currentPage} + '?sortField=author&sortDir=' + ${reverseSortDir}}">
+                    Author</a>
+            </th>
+            <th sec:authorize="hasAnyAuthority('ADMIN')">Is free
+            </th>
             </th>
             <th> Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${listBooks}">
-            <td style="word-wrap: break-word;" th:text="${book.title}"></td>
-            <td th:text="${book.genre}"></td>
-            <td th:text="${book.yearOfPublishing}"></td>
-            <td th:text="${book.specification}"></td>
-            <td><a th:href="@{/showBookFormForUpdate/{id}(id=${book.id})}" class="btn btn-primary">Update</a>
-                <a th:href="@{/deleteBook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+        <tr sec:authorize="hasAnyAuthority('USER')" th:each="book : ${listBooks}">
+
+            <td th:if="book.isFree" th:text="${book.title}"></td>
+            <td th:if="book.isFree" th:text="${book.genre}"></td>
+            <td th:if="book.isFree" th:text="${book.yearOfPublishing}"></td>
+            <td th:if="book.isFree" th:text="${book.specification}"></td>
+            <td th:if="book.isFree" th:text="${book.author}"></td>
+<!--            <td th:if="book.isFree" sec:authorize="hasAnyAuthority('ADMIN')" th:if="!book.isFree">Not Free</td>-->
+<!--            <td th:if="book.isFree" sec:authorize="hasAnyAuthority('ADMIN')" th:if="book.isFree">Free</td>-->
+<!--            <td th:if="book.isFree" sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/showBookFormForUpdate/{id}(id=${book.id})}"-->
+<!--                                                            class="btn btn-primary">Update</a>-->
+<!--                <a th:href="@{/deleteBook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>-->
+<!--            </td>-->
+            <td th:if="book.isFree"><a th:href="@{/addBookToCabinet/{id}(id=${book.id})}"
+                                                           class="btn btn-primary">Read</a>
             </td>
         </tr>
         </tbody>

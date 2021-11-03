@@ -15,9 +15,6 @@ public enum Genre {
 
     private String name;
 
-    Genre() {
-    }
-
     Genre(String name) {
         this.name = name;
     }
