@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<bode>
+    <div class="container">
+        <h1>Book Management System</h1>
+        <hr>
+        <h2>Update Book</h2>
+
+        <form action="#" th:action="@{/saveAuthor}" th:object="${author}"
+              method="POST">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="text" th:field="*{surname}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+
+            <button type="submit" class="btn btn-info col-2"> Update Author</button>
+        </form>
+        <hr>
+        <a th:href="@{/author}"> Back to Author List</a>
+    </div>
+</bode>
+</html>
