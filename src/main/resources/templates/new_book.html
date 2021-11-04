@@ -17,19 +17,18 @@
 
     <form action="#" th:action="@{/saveBook}" th:object="${book}"
           method="POST">
-        <input type="text" maxlength="30" th:field="*{title}"
+        <input maxlength="30" minlength="4" required type="text" th:field="*{title}"
                placeholder="Title" class="form-control mb-4 col-4">
 
-        <input type="number" minlength="4"
-               maxlength="4" th:field="*{yearOfPublishing}"
+        <input max="2021" min="1000" required type="number"  th:field="*{yearOfPublishing}"
                placeholder="Year of publishing" class="form-control mb-4 col-4">
 
-        <input type="text" maxlength="40" th:field="*{specification}"
+        <input maxlength="30" minlength="4" required type="text" th:field="*{specification}"
                placeholder="Specification" class="form-control mb-4 col-4">
 
         <div class="form-group">
             <label for="genre">Choose genre</label>
-            <select th:field="*{genre}" class="form-control mb-4 col-4 selectpicker" id="genre">
+            <select required th:field="*{genre}" class="form-control mb-4 col-4 selectpicker" id="genre">
                 <option value="">Nothing selected</option>
                 <option th:each="g : ${T(com.bsuir.test.model.Genre).values()}"
                         th:value="${g}"
@@ -40,7 +39,7 @@
 
         <div class="form-group">
             <label for="authors">Choose author</label>
-            <select th:field="*{author}" class="form-control mb-4 col-4 selectpicker" id="authors">
+            <select required th:field="*{author}" class="form-control mb-4 col-4 selectpicker" id="authors">
                 <option value="">Nothing selected</option>
                 <option th:each="author : ${authorsList}"
                         th:value="${author.id}"
